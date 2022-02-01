@@ -1,6 +1,4 @@
 import cv2 as cv
-from cv2 import bitwise_not
-from cv2 import cvtColor
 import numpy as np
 
 class Frame():
@@ -47,33 +45,15 @@ def main(video):
         if video == 'videos/fishVideo.mp4':
             lower, upper = [100,50,100], [255,255,255]
         elif video == 'videos/Betta.mp4':
-            frame = cvtColor(frame, cv.COLOR_BGR2GRAY)
+            frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
             frame = cv.GaussianBlur(frame, (21, 21), 0)
-            #lower, upper = [0, 0, 0], [254.99,255,255] Put color idea on hold.
 
-        # colorMask1 = frameMan.colorMaskOfFrame(upperLeft1, lowerRight1, lower, upper)
-        # colorMask2 = frameMan.colorMaskOfFrame(upperLeft2,lowerRight2,lower,upper)
-        # colorMask3 = bitwise_not(colorMask2)+bitwise_not(colorMask1) # Purely for visuals.
+        cv.imshow('Blurred', frame)
 
-
-
-#        if cv.mean(frame, colorMask1) > cv.mean(frame,colorMask2):
-#           print('Top')
-#        elif cv.mean(frame, colorMask1) < cv.mean(frame,colorMask2):
-#            print('Bottom')
-#        elif cv.mean(frame, colorMask1) == cv.mean(frame,colorMask2):
-#            print('Neither')
-
-        cv.imshow('Color', frame)
-        #cv.imshow('Source', frame)
 
         if cv.waitKey(1) == ord('q'):
             break
     
     cv.destroyAllWindows()
 
-videos = ['videos/Betta.mp4', 'videos/fishVideo.mp4']
-#for video in videos:
-    #main(video)
-
-main(videos[0])
+main('videos/Betta.mp4')
